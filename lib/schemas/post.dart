@@ -12,6 +12,7 @@ import 'comment_hierarchy.dart';
 import 'category.dart';
 import 'tag.dart';
 import 'media.dart';
+import 'acf.dart';
 
 /// A [WordPress Post](https://developer.wordpress.org/rest-api/reference/posts/)
 ///
@@ -100,6 +101,8 @@ class Post {
   /// The featured Media of the post.
   Media featuredMedia;
 
+  Acf acf;
+
   Post({
     this.date,
     this.dateGmt,
@@ -119,6 +122,7 @@ class Post {
     this.format = PostFormat.standard,
     this.categoryIDs,
     this.tagIDs,
+    this.acf,
   })  : this.title = new Title(rendered: title),
         this.featuredMedia = new Media(sourceUrl: featuredMedia),
         this.content = new Content(rendered: content),
@@ -181,6 +185,7 @@ class Post {
     permalinkTemplate = json['permalink_template'];
     generatedSlug = json['generated_slug'];
     lLinks = json['_links'] != null ? new Links.fromJson(json['_links']) : null;
+    acf = json['acf'] != null ? new Acf.fromJson(json['acf']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -214,6 +219,6 @@ class Post {
   @override
   String toString() {
     return 'Post: { id: $id, title: ${title.rendered}, '
-        'author: {id: $authorID, name: ${author.name}}}';
+        'author: {id: $authorID}}';
   }
 }
