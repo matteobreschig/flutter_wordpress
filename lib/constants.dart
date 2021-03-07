@@ -34,6 +34,7 @@ enum PostOrderBy {
   relevance,
   slug,
   title,
+  menu_order,
 }
 enum PostPageStatus {
   publish,
